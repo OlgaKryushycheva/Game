@@ -5,7 +5,7 @@
 ## Запуск
 
 1. Gradle 9.2.1 сумісний із JDK 25, тож достатньо встановленого JDK 25 (або новішого). Код збирається під Java 21 через Gradle Toolchains, тому встановлення JDK 21 окремо не потрібне.
-2. Встановіть **локальний Gradle 9.2.1** (потрібен лише для генерації відсутнього `gradle/wrapper/gradle-wrapper.jar`):
+2. Встановіть **локальний Gradle 9.2.1** (потрібен лише для генерації відсутнього `gradle/wrapper/gradle-wrapper.jar`). Беріть архів із каталогу дистрибутивів, а не з GitHub mirror:
    - Завантажте ZIP 9.2.1 із каталогу https://services.gradle.org/distributions/ (файл `gradle-9.2.1-bin.zip`).
    - Розпакуйте архів у зручну теку, наприклад `C:\Gradle\gradle-9.2.1` або `/opt/gradle/gradle-9.2.1`.
    - Додайте шлях до `bin` у `PATH` (Windows: *Система → Додаткові параметри → Змінні середовища*, змінна `Path`; Linux/macOS: додайте `export PATH=/opt/gradle/gradle-9.2.1/bin:$PATH` до свого шеллу).
@@ -22,11 +22,13 @@
    - Запустіть `./gradlew --version` один раз, щоб він створив структуру кешу в `~/.gradle/wrapper/dists/`.
    - Скопіюйте `gradle-9.2.1-bin.zip` у створену підпапку `~/.gradle/wrapper/dists/gradle-9.2.1-bin/<hash>/`. Назву `<hash>` можна піддивитися у створеній директорії.
    - Після цього wrapper не буде нічого качати.
-5. Запустіть гру:
+5. Запустіть гру **тільки через wrapper** (не використовуйте ключ `-b`, його Gradle 9 більше не підтримує):
 
    ```bash
    ./gradlew :app:run
    ```
+
+   На Windows використовуйте `.\gradlew.bat :app:run` у терміналі IntelliJ IDEA.
 
 > Примітка: Wrapper зафіксований на Gradle 9.2.1. Достатньо JDK 25+: Gradle сам завантажить toolchain для компіляції під Java 21.
 
