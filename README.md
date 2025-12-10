@@ -11,7 +11,7 @@
    gradle wrapper --gradle-version 8.17
    ```
 
-3. Якщо доступ до `services.gradle.org` чи GitHub обмежений, попередньо завантажте дистрибутив Gradle 8.17 із дзеркала `https://downloads.gradle-dn.com/distributions/gradle-8.17-bin.zip` і покладіть у кеш `~/.gradle/wrapper/dists/` (повну структуру шляху Gradle створить автоматично після першої спроби запуску wrapper).
+3. Якщо прямий доступ до `https://services.gradle.org/distributions/gradle-8.17-bin.zip` недоступний, завантажте цей ZIP із машини з інтернетом і покладіть у кеш `~/.gradle/wrapper/dists/` (повну структуру шляху Gradle створить автоматично після першої спроби запуску wrapper). Це прибирає спроби звернення до GitHub-дзеркал під час старту.
 
 4. Запустіть гру:
 
