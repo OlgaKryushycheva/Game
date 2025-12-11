@@ -11,6 +11,8 @@ import java.util.concurrent.ThreadLocalRandom;
  * щоби збігалася з іменем файлу та уникати помилок компіляції.
  */
 public class WordRepository {
+    private static final Locale UK_LOCALE = Locale.forLanguageTag("uk");
+
     private final List<WordEntry> words = Arrays.asList(
             new WordEntry("КОМП'ЮТЕР", "електронна машина для обробки даних"),
             new WordEntry("ІНТЕЛЕКТ", "здатність мислити, розуміти й навчатися"),
@@ -32,7 +34,7 @@ public class WordRepository {
     public WordEntry randomEntry() {
         int index = ThreadLocalRandom.current().nextInt(words.size());
         WordEntry entry = words.get(index);
-        return new WordEntry(entry.word().toUpperCase(Locale.forLanguageTag("uk")), entry.hint());
+        return new WordEntry(entry.word().toUpperCase(UK_LOCALE), entry.hint());
     }
 
     public String guessByPattern(String pattern, List<Character> excluded) {
