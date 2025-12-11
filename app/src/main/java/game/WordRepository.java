@@ -7,8 +7,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Репозиторій слів із короткими підказками для раундів гри.
- * ВАЖЛИВО: назва класу повинна залишатися WordRepository (ASCII),
- * щоби збігалася з іменем файлу та уникати помилок компіляції.
+ * Назва класу повинна залишатися WordRepository (ASCII), щоб збігалася з іменем файлу
+ * та уникати помилок компіляції на різних ОС і файлових системах.
  */
 public class WordRepository {
     private static final Locale UK_LOCALE = Locale.forLanguageTag("uk");
