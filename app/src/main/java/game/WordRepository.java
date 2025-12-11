@@ -7,6 +7,8 @@ import java.util.concurrent.ThreadLocalRandom;
 
 /**
  * Репозиторій слів із короткими підказками для раундів гри.
+ * ВАЖЛИВО: назва класу повинна залишатися WordRepository (ASCII),
+ * щоби збігалася з іменем файлу та уникати помилок компіляції.
  */
 public class WordRepository {
     private final List<WordEntry> words = Arrays.asList(
