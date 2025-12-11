@@ -1,5 +1,6 @@
 package game;
 
+import java.util.NoSuchElementException;
 import java.util.Scanner;
 
 /**
@@ -20,12 +21,18 @@ public class InputHelper {
         if (prompt != null && !prompt.isEmpty()) {
             System.out.print(prompt);
         }
-        if (!scanner.hasNextLine()) {
+        try {
+            if (!scanner.hasNextLine()) {
+                System.out.println();
+                System.out.println("Ввід недоступний. Запустіть задачу у звичайному терміналі та вводьте команди вручну.");
+                throw new InputUnavailableException();
+            }
+            return scanner.nextLine();
+        } catch (NoSuchElementException e) {
             System.out.println();
-            System.out.println("Ввід недоступний. Запустіть задачу у звичайному терміналі та вводьте команди вручну.");
+            System.out.println("Ввід недоступний. Запустіть задачу у звичайному терміналі з можливістю вводити текст.");
             throw new InputUnavailableException();
         }
-        return scanner.nextLine();
     }
 
     /**
