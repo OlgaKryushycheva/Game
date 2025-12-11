@@ -5,6 +5,9 @@ import java.util.List;
 import java.util.Locale;
 import java.util.concurrent.ThreadLocalRandom;
 
+/**
+ * Репозиторій слів із короткими підказками для раундів гри.
+ */
 public class WordRepository {
     private final List<WordEntry> words = Arrays.asList(
             new WordEntry("КОМП'ЮТЕР", "електронна машина для обробки даних"),
