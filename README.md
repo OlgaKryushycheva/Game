@@ -30,6 +30,7 @@
    ./gradlew :app:run
    ```
 
+   - Команда вже передає stdin у гру, тож після появи `>` просто вводьте цифри/букви та натискайте Enter.
    - Windows PowerShell/CMD: у терміналі IntelliJ введіть `.\gradlew.bat :app:run`. Якщо бачите "кракозябри", перед запуском задайте UTF-8: `chcp 65001` і (за потреби) `set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8`.
    - Git Bash (MINGW64): спочатку `cd /c/шлях/до/Game`, потім `./gradlew.bat :app:run`. Помилка `No such file or directory` означає, що ви не в корені проєкту.
    - "Звичайний термінал" = будь-яке вікно, де ви реально можете набирати текст (PowerShell, CMD, Git Bash, Terminal на macOS/Linux). Не плутайте з вкладкою *Gradle* у IDE, яка часто не передає інтерактивний ввід.

@@ -28,6 +28,11 @@ application {
     ]
 }
 
+// Allow interactive ввід через Gradle wrapper/IDE run task
+tasks.named('run') {
+    standardInput = System.in
+}
+
 tasks.named('test') {
     useJUnitPlatform()
 }
