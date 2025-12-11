@@ -5,21 +5,20 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
-import java.util.Scanner;
 
 public class GameSession {
     private final List<Player> players;
     private final Scoreboard scoreboard;
     private final WordRepository wordRepository;
     private final Wheel wheel;
-    private final Scanner scanner;
+    private final InputHelper input;
 
-    public GameSession(List<Player> players, Scoreboard scoreboard, WordRepository wordRepository, Wheel wheel, Scanner scanner) {
+    public GameSession(List<Player> players, Scoreboard scoreboard, WordRepository wordRepository, Wheel wheel, InputHelper input) {
         this.players = players;
         this.scoreboard = scoreboard;
         this.wordRepository = wordRepository;
         this.wheel = wheel;
-        this.scanner = scanner;
+        this.input = input;
     }
 
     public void play() {
@@ -64,11 +63,10 @@ public class GameSession {
 
     private void executeHumanTurn(Player player, RoundState round, Map<Player, Integer> roundScores, int spin) {
         System.out.printf("Ви вибили %d очок. Введіть букву або спробуйте відгадати слово:%n", spin);
-        System.out.print("> ");
-        String guess = scanner.nextLine().trim();
+        String guess = input.nextTrimmedOrExit("> ");
         while (guess.isBlank()) {
             System.out.print("Порожній ввід. Спробуйте ще раз: ");
-            guess = scanner.nextLine().trim();
+            guess = input.nextTrimmedOrExit("");
         }
         processGuess(player, round, roundScores, spin, guess);
     }
@@ -130,8 +128,7 @@ public class GameSession {
 
     private boolean askForNextRound() {
         System.out.println("Зіграти ще один раунд? (y/n)");
-        System.out.print("> ");
-        String answer = scanner.nextLine().trim().toLowerCase(Locale.ROOT);
+        String answer = input.nextTrimmedOrExit("> ").toLowerCase(Locale.ROOT);
         return answer.startsWith("y") || answer.equals("т");
     }
 

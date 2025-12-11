@@ -5,33 +5,37 @@ import java.util.List;
 import java.util.Scanner;
 
 public class GameEngine {
-    private final Scanner scanner;
+    private final InputHelper input;
     private final Scoreboard scoreboard;
     private final WordRepository wordRepository;
     private final Wheel wheel;
 
     public GameEngine(Scanner scanner, Scoreboard scoreboard, WordRepository wordRepository, Wheel wheel) {
-        this.scanner = scanner;
+        this.input = new InputHelper(scanner);
         this.scoreboard = scoreboard;
         this.wordRepository = wordRepository;
         this.wheel = wheel;
     }
 
     public void run() {
-        boolean running = true;
-        System.out.println("Ласкаво просимо до гри \"Поле чудес\"!");
-        while (running) {
-            printMenu();
-            String choice = scanner.nextLine().trim();
-            switch (choice) {
-                case "1" -> startAiGame();
-                case "2" -> startMultiplayerGame();
-                case "3" -> showScoreboard();
-                case "0" -> running = false;
-                default -> System.out.println("Невідома команда. Спробуйте ще раз.");
+        try {
+            boolean running = true;
+            System.out.println("Ласкаво просимо до гри \"Поле чудес\"!");
+            while (running) {
+                printMenu();
+                String choice = input.nextTrimmedOrExit("");
+                switch (choice) {
+                    case "1" -> startAiGame();
+                    case "2" -> startMultiplayerGame();
+                    case "3" -> showScoreboard();
+                    case "0" -> running = false;
+                    default -> System.out.println("Невідома команда. Спробуйте ще раз.");
+                }
             }
+            System.out.println("Дякуємо за гру. До зустрічі!");
+        } catch (InputUnavailableException e) {
+            // уже вивели дружнє повідомлення у InputHelper
         }
-        System.out.println("Дякуємо за гру. До зустрічі!");
     }
 
     private void printMenu() {
@@ -46,25 +50,22 @@ public class GameEngine {
 
     private void startAiGame() {
         System.out.println("Введіть ваше ім'я:");
-        System.out.print("> ");
         String name = readNonEmpty();
         List<Player> players = new ArrayList<>();
         players.add(new Player(name));
         players.add(Player.ai());
-        new GameSession(players, scoreboard, wordRepository, wheel, scanner).play();
+        new GameSession(players, scoreboard, wordRepository, wheel, input).play();
     }
 
     private void startMultiplayerGame() {
         System.out.println("Скільки гравців буде грати? (2-4)");
-        System.out.print("> ");
         int count = readPlayerCount();
         List<Player> players = new ArrayList<>();
         for (int i = 1; i <= count; i++) {
             System.out.printf("Введіть ім'я гравця %d:%n", i);
-            System.out.print("> ");
             players.add(new Player(readNonEmpty()));
         }
-        new GameSession(players, scoreboard, wordRepository, wheel, scanner).play();
+        new GameSession(players, scoreboard, wordRepository, wheel, input).play();
     }
 
     private void showScoreboard() {
@@ -80,17 +81,17 @@ public class GameEngine {
     }
 
     private String readNonEmpty() {
-        String value = scanner.nextLine().trim();
+        String value = input.nextTrimmedOrExit("> ");
         while (value.isBlank()) {
             System.out.print("Ім'я не може бути порожнім. Спробуйте ще раз: ");
-            value = scanner.nextLine().trim();
+            value = input.nextTrimmedOrExit("");
         }
         return value;
     }
 
     private int readPlayerCount() {
         while (true) {
-            String raw = scanner.nextLine().trim();
+            String raw = input.nextTrimmedOrExit("> ");
             try {
                 int result = Integer.parseInt(raw);
                 if (result >= 2 && result <= 4) {
