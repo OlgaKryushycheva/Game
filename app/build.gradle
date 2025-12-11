@@ -13,7 +13,8 @@ dependencies {
 
 java {
     toolchain {
-        languageVersion = JavaLanguageVersion.of(21)
+        // Align with the user's installed JDK 25 to avoid toolchain downloads
+        languageVersion = JavaLanguageVersion.of(25)
     }
 }
 
