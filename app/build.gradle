@@ -20,6 +20,12 @@ java {
 
 application {
     mainClass = 'game.App'
+    // Force UTF-8 output/input so Cyrillic text is readable on Windows shells
+    applicationDefaultJvmArgs = [
+            '-Dfile.encoding=UTF-8',
+            '-Dsun.stdout.encoding=UTF-8',
+            '-Dsun.stderr.encoding=UTF-8'
+    ]
 }
 
 tasks.named('test') {

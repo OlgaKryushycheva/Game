@@ -30,8 +30,9 @@
    ./gradlew :app:run
    ```
 
-   - Windows: у вбудованому терміналі IntelliJ введіть `.\gradlew.bat :app:run`.
-   - "Звичайний термінал" = будь-яке вікно, де ви реально можете набирати текст (PowerShell, CMD, Terminal на macOS/Linux). Не плутайте з вкладкою *Gradle* у IDE, яка часто не передає інтерактивний ввід.
+   - Windows PowerShell/CMD: у терміналі IntelliJ введіть `.\gradlew.bat :app:run`. Якщо бачите "кракозябри", перед запуском задайте UTF-8: `chcp 65001` і (за потреби) `set JAVA_TOOL_OPTIONS=-Dfile.encoding=UTF-8`.
+   - Git Bash (MINGW64): спочатку `cd /c/шлях/до/Game`, потім `./gradlew.bat :app:run`. Помилка `No such file or directory` означає, що ви не в корені проєкту.
+   - "Звичайний термінал" = будь-яке вікно, де ви реально можете набирати текст (PowerShell, CMD, Git Bash, Terminal на macOS/Linux). Не плутайте з вкладкою *Gradle* у IDE, яка часто не передає інтерактивний ввід.
    - Якщо Gradle запущено без можливості вводити текст, гра побачить відсутність вводу й завершиться з підказкою відкрити звичайний термінал.
 2. **Через IntelliJ IDEA (якщо хочете кнопкою Run):**
    - Відкрийте проєкт **File → Open…** і виберіть корінь репозиторію; IntelliJ сам підхопить Gradle-проєкт.
