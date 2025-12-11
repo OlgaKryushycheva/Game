@@ -6,12 +6,22 @@ import java.util.Set;
 
 public class RoundState {
     private final String targetWord;
+    private final String hint;
     private final char[] progress;
     private final Set<Character> guessedLetters = new HashSet<>();
     private Player solver;
 
     public RoundState(String targetWord) {
+        this(targetWord, null);
+    }
+
+    public RoundState(WordEntry entry) {
+        this(entry.word(), entry.hint());
+    }
+
+    private RoundState(String targetWord, String hint) {
         this.targetWord = targetWord.toUpperCase(Locale.forLanguageTag("uk"));
+        this.hint = hint;
         this.progress = new char[targetWord.length()];
         for (int i = 0; i < progress.length; i++) {
             char c = this.targetWord.charAt(i);
@@ -92,5 +102,9 @@ public class RoundState {
 
     public String targetWord() {
         return targetWord;
+    }
+
+    public String hint() {
+        return hint;
     }
 }

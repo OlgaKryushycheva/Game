@@ -24,10 +24,14 @@ public class GameSession {
     public void play() {
         boolean continuePlaying = true;
         while (continuePlaying) {
-            RoundState round = new RoundState(wordRepository.randomWord());
+            WordEntry entry = wordRepository.randomEntry();
+            RoundState round = new RoundState(entry);
             Map<Player, Integer> roundScores = new HashMap<>();
             int turn = 0;
             System.out.println("\nНове слово обране. Починаємо раунд!");
+            if (round.hint() != null && !round.hint().isBlank()) {
+                System.out.println("Підказка: " + round.hint());
+            }
             while (!round.solved()) {
                 Player current = players.get(turn % players.size());
                 handleTurn(current, round, roundScores);

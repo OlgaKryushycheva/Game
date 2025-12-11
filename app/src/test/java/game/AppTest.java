@@ -22,4 +22,11 @@ class AppTest {
         scoreboard.recordScore("Player", 50);
         assertEquals(150, scoreboard.top(1).get(0).score());
     }
+
+    @Test
+    void roundStateStoresHint() {
+        RoundState state = new RoundState(new WordEntry("ТЕСТ", "підказка"));
+        assertEquals("підказка", state.hint());
+        assertEquals("ТЕСТ", state.targetWord());
+    }
 }
