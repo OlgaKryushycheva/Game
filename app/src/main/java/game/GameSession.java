@@ -9,11 +9,11 @@ import java.util.Map;
 public class GameSession {
     private final List<Player> players;
     private final Scoreboard scoreboard;
-    private final WordRepository wordRepository;
+    private final Words wordRepository;
     private final Wheel wheel;
     private final InputHelper input;
 
-    public GameSession(List<Player> players, Scoreboard scoreboard, WordRepository wordRepository, Wheel wheel, InputHelper input) {
+    public GameSession(List<Player> players, Scoreboard scoreboard, Words wordRepository, Wheel wheel, InputHelper input) {
         this.players = players;
         this.scoreboard = scoreboard;
         this.wordRepository = wordRepository;
@@ -24,10 +24,14 @@ public class GameSession {
     public void play() {
         boolean continuePlaying = true;
         while (continuePlaying) {
-            RoundState round = new RoundState(wordRepository.randomWord());
+            WordEntry entry = wordRepository.randomEntry();
+            RoundState round = new RoundState(entry);
             Map<Player, Integer> roundScores = new HashMap<>();
             int turn = 0;
             System.out.println("\nНове слово обране. Починаємо раунд!");
+            if (round.hint() != null && !round.hint().isBlank()) {
+                System.out.println("Підказка: " + round.hint());
+            }
             while (!round.solved()) {
                 Player current = players.get(turn % players.size());
                 handleTurn(current, round, roundScores);

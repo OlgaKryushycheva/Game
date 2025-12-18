@@ -14,7 +14,7 @@ public class AiStrategy {
     private AiStrategy() {
     }
 
-    public static String decideGuess(RoundState state, WordRepository repository) {
+    public static String decideGuess(RoundState state, Words repository) {
         if (state.missingLetters() <= 3) {
             String proposal = repository.guessByPattern(state.pattern().replace(" ", ""), new ArrayList<>(state.guessedLetters()));
             if (proposal != null) {

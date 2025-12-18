@@ -7,10 +7,10 @@ import java.util.Scanner;
 public class GameEngine {
     private final InputHelper input;
     private final Scoreboard scoreboard;
-    private final WordRepository wordRepository;
+    private final Words wordRepository;
     private final Wheel wheel;
 
-    public GameEngine(Scanner scanner, Scoreboard scoreboard, WordRepository wordRepository, Wheel wheel) {
+    public GameEngine(Scanner scanner, Scoreboard scoreboard, Words wordRepository, Wheel wheel) {
         this.input = new InputHelper(scanner);
         this.scoreboard = scoreboard;
         this.wordRepository = wordRepository;
